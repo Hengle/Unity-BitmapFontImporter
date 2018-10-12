@@ -26,3 +26,7 @@ fi
 
 echo 'Installing Unity.pkg'
 sudo installer -dumplog -package $pkgname -target /
+
+echo 'replace unity licent'
+sudo cp -f ./Unity_lic.ulf /Library/Application\ Support/Unity/Unity_lic.ulf
+echo $0
