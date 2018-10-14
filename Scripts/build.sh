@@ -3,6 +3,7 @@
 
 
 echo "Run test "
+echo `pwd`
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
   -nographics \
