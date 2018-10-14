@@ -22,3 +22,20 @@ install:
 script:
 - find $(pwd)
 - ./Scripts/build.sh
+- /Applications/Unity/Unity.app/Contents/MacOS/Unity 
+  -batchmode -nographics -silent-crashes 
+  -username ci@litefeel.com 
+  -password 123456Qq 
+  -logFile $(pwd)/unity.log 
+  -projectPath $(pwd) 
+  -executeMethod MyTest.Test 
+  -quit
+- cat $(pwd)/unity.log
+- /Applications/Unity/Unity.app/Contents/MacOS/Unity 
+  -batchmode -nographics -silent-crashes 
+  -username ci@litefeel.com 
+  -password 123456Qq 
+  -logFile 
+  -projectPath $(pwd) 
+  -executeMethod MyTest.Test 
+  -quit
