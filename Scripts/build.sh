@@ -4,6 +4,16 @@
 
 echo "Run test "
 echo `pwd`
+
+echo "Active Unity"
+/Applications/Unity/Unity.app/Contents/MacOS/Unity \
+  -batchmode \
+  -username ci@litefeel.com \
+  -password 123456Qq \
+  -logFile \
+  -quit
+
+echo "Build player"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
   -nographics \
