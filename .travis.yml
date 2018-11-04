@@ -4,7 +4,7 @@ env:
   global:
   - IMAGE_NAME=gableroux/unity3d:2018.2.6f1
   - BUILD_NAME=ExampleProjectName
-  - UNITY_VERSION=2018.2.3f1
+  - UNITY_VERSION=2018.2.6f1
 services:
 - docker
 before_install:
