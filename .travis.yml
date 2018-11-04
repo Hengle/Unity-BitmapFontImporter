@@ -1,41 +1,20 @@
-# origin Travis CI form https://github.com/JonathanPorta/ci-build
-
-language: objective-c
-osx_image: xcode7.3
-
+sudo: required
+language: bash
 env:
-  matrix:
-    - UNITY_VERSION=beta
-    - UNITY_VERSION=last
-    - UNITY_VERSION=2017.2
-    # - UNITY_VERSION=2017.1
-    # - UNITY_VERSION=5.6
-
-matrix:
-  allow_failures:
-    - env: UNITY_VERSION=beta
-
+  global:
+  - IMAGE_NAME=gableroux/unity3d:2018.2.6f1
+  - BUILD_NAME=ExampleProjectName
+  - UNITY_VERSION=2018.2.3f1
+services:
+- docker
 before_install:
-- chmod -R +x ./Scripts
-install:
-- travis_wait 50 ./Scripts/install.sh
-script:
-- find $(pwd)
-- ./Scripts/build.sh
-- /Applications/Unity/Unity.app/Contents/MacOS/Unity 
-  -batchmode -nographics -silent-crashes 
-  -username ci@litefeel.com 
-  -password 123456Qq 
-  -logFile $(pwd)/unity.log 
-  -projectPath $(pwd) 
-  -executeMethod MyTest.Test 
-  -quit
-- cat $(pwd)/unity.log
-- /Applications/Unity/Unity.app/Contents/MacOS/Unity 
-  -batchmode -nographics -silent-crashes 
-  -username ci@litefeel.com 
-  -password 123456Qq 
-  -logFile 
-  -projectPath $(pwd) 
-  -executeMethod MyTest.Test 
-  -quit
+- docker pull $IMAGE_NAME
+script: >
+  docker run -it --rm 
+  -e "UNITY_USERNAME=ci@litefeel.com" 
+  -e "UNITY_PASSWORD=123456Qq" 
+  -e "TEST_PLATFORM=linux" 
+  -e "WORKDIR=/root/project" 
+  -v "$(pwd):/root/project" 
+  gableroux/unity3d:$UNITY_VERSION 
+  bash
